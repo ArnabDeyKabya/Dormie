@@ -44,7 +44,7 @@ public class PaymentController {
         String tranId = params.getOrDefault("tran_id", "unknown");
         String valId = params.getOrDefault("val_id", "unknown");
 
-        // 🔁 Redirect to static page with query params
+        //Redirect to static page with query params
         String redirectUrl = "/payment-success.html?tran_id=" + tranId + "&val_id=" + valId;
 
         return ResponseEntity.status(HttpStatus.FOUND)
@@ -56,25 +56,25 @@ public class PaymentController {
     @GetMapping("/ssl-success-page")
     @ResponseBody
     public String paymentSuccessGet() {
-        return "✅ Payment Success (GET)";
+        return "Payment Success (GET)";
     }
 
-    // ❌ Payment Failed
+    //Payment Failed
     @PostMapping("/ssl-fail-page")
     @ResponseBody
     public String paymentFailPost(@RequestParam Map<String, String> allParams) {
-        System.out.println("❌ Payment failed: " + allParams);
-        return "❌ Payment Failed<br><br>" + allParams.entrySet().stream()
+        System.out.println("Payment failed: " + allParams);
+        return "Payment Failed<br><br>" + allParams.entrySet().stream()
                 .map(e -> e.getKey() + ": " + e.getValue())
                 .reduce("", (a, b) -> a + "<br>" + b);
     }
 
-    // ⚠️ Payment Cancelled
+    //Payment Cancelled
     @PostMapping("/ssl-cancel-page")
     @ResponseBody
     public String paymentCancelPost(@RequestParam Map<String, String> allParams) {
-        System.out.println("⚠️ Payment cancelled: " + allParams);
-        return "⚠️ Payment Cancelled<br><br>" + allParams.entrySet().stream()
+        System.out.println("Payment cancelled: " + allParams);
+        return "Payment Cancelled<br><br>" + allParams.entrySet().stream()
                 .map(e -> e.getKey() + ": " + e.getValue())
                 .reduce("", (a, b) -> a + "<br>" + b);
     }
